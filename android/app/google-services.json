@@ -1,0 +1,91 @@
+{
+  "project_info": {
+    "project_number": "181382657226",
+    "firebase_url": "https://updated-etwelve-database-default-rtdb.firebaseio.com",
+    "project_id": "updated-etwelve-database",
+    "storage_bucket": "updated-etwelve-database.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:181382657226:android:dc0414e0384e84dde33033",
+        "android_client_info": {
+          "package_name": "com.etwelve.findpapers"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "181382657226-n7eoce6ogili3j897lmv800hholjbnfu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJEsfdYIFtXGTtqEU4CJ5_CFGmZ4Ge4lY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "181382657226-n7eoce6ogili3j897lmv800hholjbnfu.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "181382657226-4at0v5bt2bp4tv9iqqo3r0sdo22gia9k.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.etwelve.findpapers"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:181382657226:android:b2ccb6497814e1cfe33033",
+        "android_client_info": {
+          "package_name": "com.etwelve.papers"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "181382657226-gqs0tlrcgis5o31u05kfdrgh6j4rqq1a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.etwelve.papers",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "181382657226-n7eoce6ogili3j897lmv800hholjbnfu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJEsfdYIFtXGTtqEU4CJ5_CFGmZ4Ge4lY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "181382657226-n7eoce6ogili3j897lmv800hholjbnfu.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "181382657226-4at0v5bt2bp4tv9iqqo3r0sdo22gia9k.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.etwelve.findpapers"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
