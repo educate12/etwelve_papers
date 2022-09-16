@@ -828,179 +828,187 @@ class _ProfileWidgetState extends State<ProfileWidget>
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              StreamBuilder<List<AppsRecord>>(
-                                stream: queryAppsRecord(
-                                  queryBuilder: (appsRecord) =>
-                                      appsRecord.where('name',
-                                          isEqualTo: 'etwelve papers'),
-                                  singleRecord: true,
-                                ),
-                                builder: (context, snapshot) {
-                                  // Customize what your widget looks like when it's loading.
-                                  if (!snapshot.hasData) {
-                                    return Center(
-                                      child: SizedBox(
-                                        width: 25,
-                                        height: 25,
-                                        child: SpinKitFadingCube(
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryColor,
-                                          size: 25,
+                              Expanded(
+                                child: StreamBuilder<List<AppsRecord>>(
+                                  stream: queryAppsRecord(
+                                    queryBuilder: (appsRecord) =>
+                                        appsRecord.where('name',
+                                            isEqualTo: 'etwelve papers'),
+                                    singleRecord: true,
+                                  ),
+                                  builder: (context, snapshot) {
+                                    // Customize what your widget looks like when it's loading.
+                                    if (!snapshot.hasData) {
+                                      return Center(
+                                        child: SizedBox(
+                                          width: 25,
+                                          height: 25,
+                                          child: SpinKitFadingCube(
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryColor,
+                                            size: 25,
+                                          ),
+                                        ),
+                                      );
+                                    }
+                                    List<AppsRecord> containerAppsRecordList =
+                                        snapshot.data!;
+                                    final containerAppsRecord =
+                                        containerAppsRecordList.isNotEmpty
+                                            ? containerAppsRecordList.first
+                                            : null;
+                                    return InkWell(
+                                      onTap: () async {
+                                        logFirebaseEvent(
+                                            'PROFILE_PAGE_Container_zxd03ydg_ON_TAP');
+                                        logFirebaseEvent(
+                                            'Container_Navigate-To');
+
+                                        context.pushNamed(
+                                          'privacyPolicy',
+                                          extra: <String, dynamic>{
+                                            kTransitionInfoKey: TransitionInfo(
+                                              hasTransition: true,
+                                              transitionType: PageTransitionType
+                                                  .bottomToTop,
+                                              duration:
+                                                  Duration(milliseconds: 100),
+                                            ),
+                                          },
+                                        );
+                                      },
+                                      child: Container(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.9,
+                                        height: 40,
+                                        decoration: BoxDecoration(
+                                          color: Colors.transparent,
+                                          borderRadius:
+                                              BorderRadius.circular(0),
+                                          shape: BoxShape.rectangle,
+                                          border: Border.all(
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryColor,
+                                            width: 1,
+                                          ),
+                                        ),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(10, 0, 0, 0),
+                                              child: InkWell(
+                                                onTap: () async {
+                                                  logFirebaseEvent(
+                                                      'PROFILE_PAGE_Text_g3b6pp51_ON_TAP');
+                                                  logFirebaseEvent(
+                                                      'Text_Launch-U-R-L');
+                                                  await launchURL(
+                                                      containerAppsRecord!
+                                                          .privacyPolicy!);
+                                                },
+                                                child: Text(
+                                                  'Privacy Policy',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyText1
+                                                      .override(
+                                                        fontFamily:
+                                                            'Lexend Deca',
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .persianBlue,
+                                                        fontSize: 12,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        decoration:
+                                                            TextDecoration
+                                                                .underline,
+                                                      ),
+                                                ),
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(10, 0, 0, 0),
+                                              child: InkWell(
+                                                onTap: () async {
+                                                  logFirebaseEvent(
+                                                      'PROFILE_PAGE_Text_wm8xsbld_ON_TAP');
+                                                  logFirebaseEvent(
+                                                      'Text_Launch-U-R-L');
+                                                  await launchURL(
+                                                      containerAppsRecord!
+                                                          .terms!);
+                                                },
+                                                child: Text(
+                                                  'Terms and Conditions',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyText1
+                                                      .override(
+                                                        fontFamily:
+                                                            'Lexend Deca',
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .persianBlue,
+                                                        fontSize: 12,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        decoration:
+                                                            TextDecoration
+                                                                .underline,
+                                                      ),
+                                                ),
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(10, 0, 10, 0),
+                                              child: InkWell(
+                                                onTap: () async {
+                                                  logFirebaseEvent(
+                                                      'PROFILE_PAGE_Text_woutxo06_ON_TAP');
+                                                  logFirebaseEvent(
+                                                      'Text_Launch-U-R-L');
+                                                  await launchURL(
+                                                      containerAppsRecord!
+                                                          .disclaimer!);
+                                                },
+                                                child: Text(
+                                                  'Disclaimer',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyText1
+                                                      .override(
+                                                        fontFamily:
+                                                            'Lexend Deca',
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .persianBlue,
+                                                        fontSize: 12,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        decoration:
+                                                            TextDecoration
+                                                                .underline,
+                                                      ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     );
-                                  }
-                                  List<AppsRecord> containerAppsRecordList =
-                                      snapshot.data!;
-                                  final containerAppsRecord =
-                                      containerAppsRecordList.isNotEmpty
-                                          ? containerAppsRecordList.first
-                                          : null;
-                                  return InkWell(
-                                    onTap: () async {
-                                      logFirebaseEvent(
-                                          'PROFILE_PAGE_Container_zxd03ydg_ON_TAP');
-                                      logFirebaseEvent('Container_Navigate-To');
-
-                                      context.pushNamed(
-                                        'privacyPolicy',
-                                        extra: <String, dynamic>{
-                                          kTransitionInfoKey: TransitionInfo(
-                                            hasTransition: true,
-                                            transitionType:
-                                                PageTransitionType.bottomToTop,
-                                            duration:
-                                                Duration(milliseconds: 100),
-                                          ),
-                                        },
-                                      );
-                                    },
-                                    child: Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.9,
-                                      height: 40,
-                                      decoration: BoxDecoration(
-                                        color: Colors.transparent,
-                                        borderRadius: BorderRadius.circular(0),
-                                        shape: BoxShape.rectangle,
-                                        border: Border.all(
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryColor,
-                                          width: 1,
-                                        ),
-                                      ),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    10, 0, 0, 0),
-                                            child: InkWell(
-                                              onTap: () async {
-                                                logFirebaseEvent(
-                                                    'PROFILE_PAGE_Text_g3b6pp51_ON_TAP');
-                                                logFirebaseEvent(
-                                                    'Text_Launch-U-R-L');
-                                                await launchURL(
-                                                    containerAppsRecord!
-                                                        .privacyPolicy!);
-                                              },
-                                              child: Text(
-                                                'Privacy Policy',
-                                                style: FlutterFlowTheme.of(
-                                                        context)
-                                                    .bodyText1
-                                                    .override(
-                                                      fontFamily: 'Lexend Deca',
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .persianBlue,
-                                                      fontSize: 12,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      decoration: TextDecoration
-                                                          .underline,
-                                                    ),
-                                              ),
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    10, 0, 0, 0),
-                                            child: InkWell(
-                                              onTap: () async {
-                                                logFirebaseEvent(
-                                                    'PROFILE_PAGE_Text_wm8xsbld_ON_TAP');
-                                                logFirebaseEvent(
-                                                    'Text_Launch-U-R-L');
-                                                await launchURL(
-                                                    containerAppsRecord!
-                                                        .terms!);
-                                              },
-                                              child: Text(
-                                                'Terms and Conditions',
-                                                style: FlutterFlowTheme.of(
-                                                        context)
-                                                    .bodyText1
-                                                    .override(
-                                                      fontFamily: 'Lexend Deca',
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .persianBlue,
-                                                      fontSize: 12,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      decoration: TextDecoration
-                                                          .underline,
-                                                    ),
-                                              ),
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    10, 0, 0, 0),
-                                            child: InkWell(
-                                              onTap: () async {
-                                                logFirebaseEvent(
-                                                    'PROFILE_PAGE_Text_woutxo06_ON_TAP');
-                                                logFirebaseEvent(
-                                                    'Text_Launch-U-R-L');
-                                                await launchURL(
-                                                    containerAppsRecord!
-                                                        .disclaimer!);
-                                              },
-                                              child: Text(
-                                                'Disclaimer',
-                                                style: FlutterFlowTheme.of(
-                                                        context)
-                                                    .bodyText1
-                                                    .override(
-                                                      fontFamily: 'Lexend Deca',
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .persianBlue,
-                                                      fontSize: 12,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      decoration: TextDecoration
-                                                          .underline,
-                                                    ),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  );
-                                },
+                                  },
+                                ),
                               ),
                             ],
                           ),

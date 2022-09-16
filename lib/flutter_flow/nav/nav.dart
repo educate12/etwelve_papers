@@ -107,16 +107,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => Onboarding2Widget(),
             ),
             FFRoute(
-              name: 'Onboarding4',
-              path: 'onboarding4',
-              requireAuth: true,
-              builder: (context, params) => Onboarding4Widget(),
-            ),
-            FFRoute(
               name: 'Onboarding3',
               path: 'onboarding3',
               requireAuth: true,
               builder: (context, params) => Onboarding3Widget(),
+            ),
+            FFRoute(
+              name: 'Onboarding4',
+              path: 'onboarding4',
+              requireAuth: true,
+              builder: (context, params) => Onboarding4Widget(),
             ),
             FFRoute(
               name: 'Onboarding5',
