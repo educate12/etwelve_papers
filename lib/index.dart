@@ -17,8 +17,3 @@ export 'forgot_password/forgot_password_widget.dart' show ForgotPasswordWidget;
 export 'chats/chats_widget.dart' show ChatsWidget;
 export 'chat_page/chat_page_widget.dart' show ChatPageWidget;
 export 'start_chat/start_chat_widget.dart' show StartChatWidget;
-export 'tutors/tutors_widget.dart' show TutorsWidget;
-export 'privacy_policy/privacy_policy_widget.dart' show PrivacyPolicyWidget;
-export 'blocked/blocked_widget.dart' show BlockedWidget;
-export 'terms/terms_widget.dart' show TermsWidget;
-export 'disclaimer/disclaimer_widget.dart' show DisclaimerWidget;

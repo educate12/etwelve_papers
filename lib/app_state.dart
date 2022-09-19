@@ -36,6 +36,14 @@ class FFAppState {
   bool agree2TandC = true;
 
   bool giveConsent = true;
+
+  String syllabus = 'caps';
+
+  DocumentReference? selectedSubject =
+      FirebaseFirestore.instance.doc('/subjects/UsmViqkkPgkSYgGloTAh');
+
+  DocumentReference? selectedPaper =
+      FirebaseFirestore.instance.doc('/papers/ZFtWkJ2xBw7eAhxBOlcu');
 }
 
 LatLng? _latLngFromString(String? val) {

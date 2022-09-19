@@ -54,11 +54,21 @@ class _ReportUserWidgetState extends State<ReportUserWidget> {
           height: double.infinity,
           decoration: BoxDecoration(
             color: FlutterFlowTheme.of(context).secondaryBackground,
+            boxShadow: [
+              BoxShadow(
+                blurRadius: 200,
+                color: FlutterFlowTheme.of(context).secondaryColor,
+                spreadRadius: 10,
+              )
+            ],
             borderRadius: BorderRadius.only(
               bottomLeft: Radius.circular(0),
               bottomRight: Radius.circular(0),
               topLeft: Radius.circular(30),
               topRight: Radius.circular(30),
+            ),
+            border: Border.all(
+              color: FlutterFlowTheme.of(context).primaryColor,
             ),
           ),
           child: Padding(

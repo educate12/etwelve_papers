@@ -22,9 +22,9 @@ class _DeleteAccountWidgetState extends State<DeleteAccountWidget> {
         color: FlutterFlowTheme.of(context).primaryBackground,
         boxShadow: [
           BoxShadow(
-            blurRadius: 5,
-            color: Color(0x4D090F13),
-            offset: Offset(0, 2),
+            blurRadius: 200,
+            color: FlutterFlowTheme.of(context).secondaryColor,
+            spreadRadius: 10,
           )
         ],
         borderRadius: BorderRadius.only(
@@ -32,6 +32,9 @@ class _DeleteAccountWidgetState extends State<DeleteAccountWidget> {
           bottomRight: Radius.circular(0),
           topLeft: Radius.circular(30),
           topRight: Radius.circular(30),
+        ),
+        border: Border.all(
+          color: FlutterFlowTheme.of(context).primaryColor,
         ),
       ),
       child: Padding(

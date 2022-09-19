@@ -57,7 +57,7 @@ class _EmptyWidgetState extends State<EmptyWidget> {
                                   FlutterFlowTheme.of(context).title3.override(
                                         fontFamily: 'Ubuntu',
                                         color: FlutterFlowTheme.of(context)
-                                            .secondaryText,
+                                            .primaryText,
                                         fontSize: 15,
                                       ),
                             ),

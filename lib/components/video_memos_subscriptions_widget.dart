@@ -61,8 +61,7 @@ class _VideoMemosSubscriptionsWidgetState
                     'Choose Subscription',
                     style: FlutterFlowTheme.of(context).title3.override(
                           fontFamily: 'Ubuntu',
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
+                          color: FlutterFlowTheme.of(context).primaryColor,
                         ),
                   ),
                 ],
@@ -130,7 +129,7 @@ class _VideoMemosSubscriptionsWidgetState
                                       .override(
                                         fontFamily: 'Ubuntu',
                                         color: FlutterFlowTheme.of(context)
-                                            .secondaryText,
+                                            .primaryText,
                                         fontSize: 18,
                                         fontWeight: FontWeight.w900,
                                       ),
@@ -147,7 +146,7 @@ class _VideoMemosSubscriptionsWidgetState
                                       .override(
                                         fontFamily: 'Ubuntu',
                                         color: FlutterFlowTheme.of(context)
-                                            .secondaryText,
+                                            .primaryText,
                                         fontSize: 18,
                                         fontWeight: FontWeight.w900,
                                       ),
@@ -331,7 +330,7 @@ class _VideoMemosSubscriptionsWidgetState
                                       .override(
                                         fontFamily: 'Ubuntu',
                                         color: FlutterFlowTheme.of(context)
-                                            .secondaryText,
+                                            .primaryText,
                                         fontSize: 18,
                                         fontWeight: FontWeight.w900,
                                       ),
@@ -348,7 +347,7 @@ class _VideoMemosSubscriptionsWidgetState
                                       .override(
                                         fontFamily: 'Ubuntu',
                                         color: FlutterFlowTheme.of(context)
-                                            .secondaryText,
+                                            .primaryText,
                                         fontSize: 18,
                                         fontWeight: FontWeight.w900,
                                       ),
@@ -532,7 +531,7 @@ class _VideoMemosSubscriptionsWidgetState
                                       .override(
                                         fontFamily: 'Ubuntu',
                                         color: FlutterFlowTheme.of(context)
-                                            .secondaryText,
+                                            .primaryText,
                                         fontSize: 18,
                                         fontWeight: FontWeight.w900,
                                       ),
@@ -549,7 +548,7 @@ class _VideoMemosSubscriptionsWidgetState
                                       .override(
                                         fontFamily: 'Ubuntu',
                                         color: FlutterFlowTheme.of(context)
-                                            .secondaryText,
+                                            .primaryText,
                                         fontSize: 18,
                                         fontWeight: FontWeight.w900,
                                       ),

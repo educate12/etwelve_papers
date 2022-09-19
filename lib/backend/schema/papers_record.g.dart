@@ -99,6 +99,13 @@ class _$PapersRecordSerializer implements StructuredSerializer<PapersRecord> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(DateTime)));
     }
+    value = object.yearString;
+    if (value != null) {
+      result
+        ..add('year_string')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     value = object.ffRef;
     if (value != null) {
       result
@@ -171,6 +178,10 @@ class _$PapersRecordSerializer implements StructuredSerializer<PapersRecord> {
           result.createdDate = serializers.deserialize(value,
               specifiedType: const FullType(DateTime)) as DateTime?;
           break;
+        case 'year_string':
+          result.yearString = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
         case 'Document__Reference__Field':
           result.ffRef = serializers.deserialize(value,
               specifiedType: const FullType(DocumentReference, const [
@@ -208,6 +219,8 @@ class _$PapersRecord extends PapersRecord {
   @override
   final DateTime? createdDate;
   @override
+  final String? yearString;
+  @override
   final DocumentReference<Object?>? ffRef;
 
   factory _$PapersRecord([void Function(PapersRecordBuilder)? updates]) =>
@@ -225,6 +238,7 @@ class _$PapersRecord extends PapersRecord {
       this.openners,
       this.paperSubject,
       this.createdDate,
+      this.yearString,
       this.ffRef})
       : super._();
 
@@ -250,6 +264,7 @@ class _$PapersRecord extends PapersRecord {
         openners == other.openners &&
         paperSubject == other.paperSubject &&
         createdDate == other.createdDate &&
+        yearString == other.yearString &&
         ffRef == other.ffRef;
   }
 
@@ -265,17 +280,19 @@ class _$PapersRecord extends PapersRecord {
                                 $jc(
                                     $jc(
                                         $jc(
-                                            $jc($jc(0, subject.hashCode),
-                                                grade.hashCode),
-                                            syllabus.hashCode),
-                                        year.hashCode),
-                                    month.hashCode),
-                                paper.hashCode),
-                            questionPaper.hashCode),
-                        memo.hashCode),
-                    openners.hashCode),
-                paperSubject.hashCode),
-            createdDate.hashCode),
+                                            $jc(
+                                                $jc($jc(0, subject.hashCode),
+                                                    grade.hashCode),
+                                                syllabus.hashCode),
+                                            year.hashCode),
+                                        month.hashCode),
+                                    paper.hashCode),
+                                questionPaper.hashCode),
+                            memo.hashCode),
+                        openners.hashCode),
+                    paperSubject.hashCode),
+                createdDate.hashCode),
+            yearString.hashCode),
         ffRef.hashCode));
   }
 
@@ -293,6 +310,7 @@ class _$PapersRecord extends PapersRecord {
           ..add('openners', openners)
           ..add('paperSubject', paperSubject)
           ..add('createdDate', createdDate)
+          ..add('yearString', yearString)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -350,6 +368,10 @@ class PapersRecordBuilder
   DateTime? get createdDate => _$this._createdDate;
   set createdDate(DateTime? createdDate) => _$this._createdDate = createdDate;
 
+  String? _yearString;
+  String? get yearString => _$this._yearString;
+  set yearString(String? yearString) => _$this._yearString = yearString;
+
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
   set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
@@ -372,6 +394,7 @@ class PapersRecordBuilder
       _openners = $v.openners?.toBuilder();
       _paperSubject = $v.paperSubject;
       _createdDate = $v.createdDate;
+      _yearString = $v.yearString;
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -408,6 +431,7 @@ class PapersRecordBuilder
               openners: _openners?.build(),
               paperSubject: paperSubject,
               createdDate: createdDate,
+              yearString: yearString,
               ffRef: ffRef);
     } catch (_) {
       late String _$failedField;

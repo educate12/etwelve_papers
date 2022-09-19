@@ -62,7 +62,12 @@ class _WatchVideoWidgetState extends State<WatchVideoWidget> {
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
             iconTheme: IconThemeData(
                 color: FlutterFlowTheme.of(context).secondaryColor),
-            automaticallyImplyLeading: true,
+            automaticallyImplyLeading: false,
+            leading: Icon(
+              Icons.arrow_back_ios,
+              color: FlutterFlowTheme.of(context).primaryColor,
+              size: 24,
+            ),
             title: Text(
               watchVideoLessonsRecord.questionNumber!,
               style: FlutterFlowTheme.of(context).subtitle1.override(
@@ -498,8 +503,12 @@ class _WatchVideoWidgetState extends State<WatchVideoWidget> {
                                                       image: DecorationImage(
                                                         fit: BoxFit.cover,
                                                         image: Image.network(
-                                                          containerUsersRecord
-                                                              .photoUrl!,
+                                                          valueOrDefault<
+                                                              String>(
+                                                            containerUsersRecord
+                                                                .photoUrl,
+                                                            'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/finance-app-sample-kugwu4/assets/ijvuhvqbvns6/uiAvatar@2x.png',
+                                                          ),
                                                         ).image,
                                                       ),
                                                       shape: BoxShape.circle,

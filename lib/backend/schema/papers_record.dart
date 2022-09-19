@@ -35,6 +35,9 @@ abstract class PapersRecord
   @BuiltValueField(wireName: 'created_date')
   DateTime? get createdDate;
 
+  @BuiltValueField(wireName: 'year_string')
+  String? get yearString;
+
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
   DocumentReference get reference => ffRef!;
@@ -48,7 +51,8 @@ abstract class PapersRecord
     ..paper = 0
     ..questionPaper = ''
     ..memo = ''
-    ..openners = ListBuilder();
+    ..openners = ListBuilder()
+    ..yearString = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('papers');
@@ -82,6 +86,7 @@ Map<String, dynamic> createPapersRecordData({
   String? memo,
   DocumentReference? paperSubject,
   DateTime? createdDate,
+  String? yearString,
 }) {
   final firestoreData = serializers.toFirestore(
     PapersRecord.serializer,
@@ -97,7 +102,8 @@ Map<String, dynamic> createPapersRecordData({
         ..memo = memo
         ..openners = null
         ..paperSubject = paperSubject
-        ..createdDate = createdDate,
+        ..createdDate = createdDate
+        ..yearString = yearString,
     ),
   );
 

@@ -49,7 +49,7 @@ class _ChatsWidgetState extends State<ChatsWidget> {
             );
           },
           child: Icon(
-            Icons.arrow_back_outlined,
+            Icons.arrow_back_ios,
             color: FlutterFlowTheme.of(context).secondaryColor,
             size: 24,
           ),
@@ -58,7 +58,7 @@ class _ChatsWidgetState extends State<ChatsWidget> {
           'All Chats',
           style: FlutterFlowTheme.of(context).bodyText1.override(
                 fontFamily: 'Ubuntu',
-                color: FlutterFlowTheme.of(context).primaryText,
+                color: FlutterFlowTheme.of(context).primaryColor,
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
@@ -169,23 +169,23 @@ class _ChatsWidgetState extends State<ChatsWidget> {
                               .contains(currentUserReference),
                           title: chatInfo.chatPreviewTitle(),
                           userProfilePic: chatInfo.chatPreviewPic(),
-                          color: FlutterFlowTheme.of(context).primaryBackground,
-                          unreadColor: Colors.blue,
+                          color: Colors.transparent,
+                          unreadColor: Color(0xFF00968A),
                           titleTextStyle: GoogleFonts.getFont(
                             'DM Sans',
-                            color: FlutterFlowTheme.of(context).primaryText,
+                            color: FlutterFlowTheme.of(context).primaryColor,
                             fontWeight: FontWeight.bold,
                             fontSize: 14,
                           ),
                           dateTextStyle: GoogleFonts.getFont(
                             'DM Sans',
-                            color: FlutterFlowTheme.of(context).primaryText,
+                            color: FlutterFlowTheme.of(context).primaryColor,
                             fontWeight: FontWeight.normal,
                             fontSize: 14,
                           ),
                           previewTextStyle: GoogleFonts.getFont(
                             'DM Sans',
-                            color: FlutterFlowTheme.of(context).primaryText,
+                            color: FlutterFlowTheme.of(context).primaryColor,
                             fontWeight: FontWeight.normal,
                             fontSize: 14,
                           ),

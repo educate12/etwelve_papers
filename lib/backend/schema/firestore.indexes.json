@@ -19,32 +19,6 @@
       ]
     },
     {
-      "collectionGroup": "papers",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "paper_subject",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "year",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "syllabus",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "grade",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "paper",
-          "order": "ASCENDING"
-        }
-      ]
-    },
-    {
       "collectionGroup": "chats",
       "queryScope": "COLLECTION",
       "fields": [

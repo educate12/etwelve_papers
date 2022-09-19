@@ -1,14 +1,15 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
+import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_toggle_icon.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CreateAccountWidget extends StatefulWidget {
@@ -19,9 +20,9 @@ class CreateAccountWidget extends StatefulWidget {
 }
 
 class _CreateAccountWidgetState extends State<CreateAccountWidget> {
-  TextEditingController? displayNameController;
+  TextEditingController? emailController;
 
-  TextEditingController? emailAddressController;
+  TextEditingController? nameController;
 
   TextEditingController? passwordController;
 
@@ -56,8 +57,8 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'createAccount'});
-    displayNameController = TextEditingController();
-    emailAddressController = TextEditingController();
+    emailController = TextEditingController();
+    nameController = TextEditingController();
     passwordController = TextEditingController();
     passwordVisibility = false;
   }
@@ -66,518 +67,271 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      backgroundColor: Color(0xFF262D34),
+      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       body: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
-        child: Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height * 1,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                FlutterFlowTheme.of(context).primaryBackground,
-                FlutterFlowTheme.of(context).secondaryBackground
-              ],
-              stops: [0, 1],
-              begin: AlignmentDirectional(-1, 0),
-              end: AlignmentDirectional(1, 0),
-            ),
-          ),
-          child: Align(
-            alignment: AlignmentDirectional(0, 0),
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  StreamBuilder<List<AppsRecord>>(
-                    stream: queryAppsRecord(
-                      queryBuilder: (appsRecord) =>
-                          appsRecord.where('name', isEqualTo: 'etwelve papers'),
-                      singleRecord: true,
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Row(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height * 1,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      fit: BoxFit.fitWidth,
+                      image: Image.asset(
+                        'assets/images/createAccount_bg@2x.png',
+                      ).image,
                     ),
-                    builder: (context, snapshot) {
-                      // Customize what your widget looks like when it's loading.
-                      if (!snapshot.hasData) {
-                        return Center(
-                          child: SizedBox(
-                            width: 25,
-                            height: 25,
-                            child: SpinKitFadingCube(
-                              color:
-                                  FlutterFlowTheme.of(context).secondaryColor,
-                              size: 25,
-                            ),
-                          ),
-                        );
-                      }
-                      List<AppsRecord> loginCardAppsRecordList = snapshot.data!;
-                      final loginCardAppsRecord =
-                          loginCardAppsRecordList.isNotEmpty
-                              ? loginCardAppsRecordList.first
-                              : null;
-                      return Container(
-                        width: MediaQuery.of(context).size.width * 0.9,
-                        decoration: BoxDecoration(
-                          color: FlutterFlowTheme.of(context).primaryBackground,
-                          borderRadius: BorderRadius.circular(16),
-                          border: Border.all(
-                            color: FlutterFlowTheme.of(context).secondaryColor,
-                            width: 1,
-                          ),
-                        ),
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(5, 5, 5, 5),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 40, 0, 0),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Padding(
+                          padding:
+                              EdgeInsetsDirectional.fromSTEB(24, 30, 24, 0),
                           child: SingleChildScrollView(
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      20, 16, 20, 0),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Expanded(
-                                        child: AutoSizeText(
-                                          'Get Started!',
-                                          style: FlutterFlowTheme.of(context)
-                                              .title1
-                                              .override(
-                                                fontFamily: 'Ubuntu',
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryText,
-                                              ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      20, 16, 20, 0),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Expanded(
-                                        child: TextFormField(
-                                          controller: displayNameController,
-                                          obscureText: false,
-                                          decoration: InputDecoration(
-                                            labelText: 'Name and Surname',
-                                            hintText:
-                                                'Enter your name and surname...',
-                                            enabledBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryColor,
-                                                width: 1,
-                                              ),
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                            ),
-                                            focusedBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryColor,
-                                                width: 1,
-                                              ),
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                            ),
-                                            errorBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color: Color(0x00000000),
-                                                width: 1,
-                                              ),
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                            ),
-                                            focusedErrorBorder:
-                                                OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color: Color(0x00000000),
-                                                width: 1,
-                                              ),
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                            ),
-                                            filled: true,
-                                            fillColor: Colors.transparent,
-                                            contentPadding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    16, 24, 0, 24),
+                                Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Text(
+                                      'Get Started',
+                                      style: FlutterFlowTheme.of(context)
+                                          .title1
+                                          .override(
+                                            fontFamily: 'Ubuntu',
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
                                           ),
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText1
-                                              .override(
-                                                fontFamily: 'Ubuntu',
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryText,
-                                              ),
-                                        ),
+                                    ),
+                                  ],
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 12, 0, 0),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Text(
+                                        'Create your account below.',
+                                        style: FlutterFlowTheme.of(context)
+                                            .subtitle1,
                                       ),
                                     ],
                                   ),
                                 ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      20, 16, 20, 0),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Expanded(
-                                        child: TextFormField(
-                                          controller: emailAddressController,
-                                          obscureText: false,
-                                          decoration: InputDecoration(
-                                            labelText: 'Email Address',
-                                            hintText:
-                                                'Enter your email here...',
-                                            enabledBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryColor,
-                                                width: 1,
-                                              ),
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                            ),
-                                            focusedBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryColor,
-                                                width: 1,
-                                              ),
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                            ),
-                                            errorBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color: Color(0x00000000),
-                                                width: 1,
-                                              ),
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                            ),
-                                            focusedErrorBorder:
-                                                OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color: Color(0x00000000),
-                                                width: 1,
-                                              ),
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                            ),
-                                            filled: true,
-                                            fillColor: Colors.transparent,
-                                            contentPadding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    16, 24, 0, 24),
-                                          ),
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText1
-                                              .override(
-                                                fontFamily: 'Ubuntu',
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryText,
-                                              ),
+                                      0, 20, 0, 0),
+                                  child: TextFormField(
+                                    controller: nameController,
+                                    obscureText: false,
+                                    decoration: InputDecoration(
+                                      hintText: 'Name and Surname',
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Color(0x00000000),
+                                          width: 1,
                                         ),
+                                        borderRadius: BorderRadius.circular(8),
                                       ),
-                                    ],
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      20, 16, 20, 0),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Expanded(
-                                        child: TextFormField(
-                                          controller: passwordController,
-                                          obscureText: !passwordVisibility,
-                                          decoration: InputDecoration(
-                                            labelText: 'Password',
-                                            hintText:
-                                                'Enter your password here...',
-                                            enabledBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryColor,
-                                                width: 1,
-                                              ),
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                            ),
-                                            focusedBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryColor,
-                                                width: 1,
-                                              ),
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                            ),
-                                            errorBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color: Color(0x00000000),
-                                                width: 1,
-                                              ),
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                            ),
-                                            focusedErrorBorder:
-                                                OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color: Color(0x00000000),
-                                                width: 1,
-                                              ),
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                            ),
-                                            filled: true,
-                                            fillColor: Colors.transparent,
-                                            contentPadding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    16, 24, 0, 24),
-                                            suffixIcon: InkWell(
-                                              onTap: () => setState(
-                                                () => passwordVisibility =
-                                                    !passwordVisibility,
-                                              ),
-                                              focusNode: FocusNode(
-                                                  skipTraversal: true),
-                                              child: Icon(
-                                                passwordVisibility
-                                                    ? Icons.visibility_outlined
-                                                    : Icons
-                                                        .visibility_off_outlined,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryColor,
-                                                size: 22,
-                                              ),
-                                            ),
-                                          ),
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText1
-                                              .override(
-                                                fontFamily: 'Ubuntu',
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryText,
-                                              ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Color(0x00000000),
+                                          width: 1,
                                         ),
+                                        borderRadius: BorderRadius.circular(8),
                                       ),
-                                    ],
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      20, 12, 20, 0),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      InkWell(
-                                        onTap: () async {
-                                          logFirebaseEvent(
-                                              'CREATE_ACCOUNT_PAGE_Text_k9i99xmi_ON_TAP');
-                                          logFirebaseEvent('Text_Alert-Dialog');
-                                          await showDialog(
-                                            context: context,
-                                            builder: (alertDialogContext) {
-                                              return AlertDialog(
-                                                title: Text(
-                                                    'Why and How we use this information:'),
-                                                content: Text(
-                                                    '1. Name and Surname - We collect your name and surname for identification purpose, other users will see your name and surname when communicating with you via chats.\n\n2. Email - We collect your email for creating an accoung for you, this email will only be visible to you and etwelve.co developers for spefic uses only, other app users won\'t see this email.\n\n3. Password - We collect your Password for protecting your account, it is only visible to you. etwelve.co won\'t have access to your Password, it\'s not even visible in our database.\n\netwelve.co will only access your account only with your permission granted.'),
-                                                actions: [
-                                                  TextButton(
-                                                    onPressed: () =>
-                                                        Navigator.pop(
-                                                            alertDialogContext),
-                                                    child: Text('Ok'),
-                                                  ),
-                                                ],
-                                              );
-                                            },
-                                          );
-                                        },
-                                        child: Text(
-                                          'Why & How we use this information.',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText1
-                                              .override(
-                                                fontFamily: 'Ubuntu',
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .persianBlue,
-                                                fontSize: 10,
-                                                decoration:
-                                                    TextDecoration.underline,
-                                              ),
+                                      errorBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Color(0x00000000),
+                                          width: 1,
                                         ),
+                                        borderRadius: BorderRadius.circular(8),
                                       ),
-                                    ],
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      5, 5, 10, 0),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      ToggleIcon(
-                                        onPressed: () async {
-                                          setState(() =>
-                                              FFAppState().giveConsent =
-                                                  !FFAppState().giveConsent);
-                                        },
-                                        value: FFAppState().giveConsent,
-                                        onIcon: Icon(
-                                          Icons.check_box,
+                                      focusedErrorBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Color(0x00000000),
+                                          width: 1,
+                                        ),
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      filled: true,
+                                      fillColor: FlutterFlowTheme.of(context)
+                                          .secondaryBackground,
+                                      contentPadding:
+                                          EdgeInsetsDirectional.fromSTEB(
+                                              20, 24, 20, 24),
+                                    ),
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyText1
+                                        .override(
+                                          fontFamily: 'Ubuntu',
                                           color: FlutterFlowTheme.of(context)
-                                              .secondaryColor,
-                                          size: 20,
+                                              .primaryColor,
                                         ),
-                                        offIcon: Icon(
-                                          Icons.check_box_outline_blank,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 12, 0, 0),
+                                  child: TextFormField(
+                                    controller: emailController,
+                                    onChanged: (_) => EasyDebounce.debounce(
+                                      'emailController',
+                                      Duration(milliseconds: 100),
+                                      () => setState(() {}),
+                                    ),
+                                    obscureText: false,
+                                    decoration: InputDecoration(
+                                      hintText: 'Email',
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Color(0x00000000),
+                                          width: 1,
+                                        ),
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Color(0x00000000),
+                                          width: 1,
+                                        ),
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      errorBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Color(0x00000000),
+                                          width: 1,
+                                        ),
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      focusedErrorBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Color(0x00000000),
+                                          width: 1,
+                                        ),
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      filled: true,
+                                      fillColor: FlutterFlowTheme.of(context)
+                                          .secondaryBackground,
+                                      contentPadding:
+                                          EdgeInsetsDirectional.fromSTEB(
+                                              20, 24, 20, 24),
+                                    ),
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyText1
+                                        .override(
+                                          fontFamily: 'Ubuntu',
                                           color: FlutterFlowTheme.of(context)
-                                              .secondaryColor,
+                                              .primaryColor,
+                                        ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 12, 0, 0),
+                                  child: TextFormField(
+                                    controller: passwordController,
+                                    onChanged: (_) => EasyDebounce.debounce(
+                                      'passwordController',
+                                      Duration(milliseconds: 100),
+                                      () => setState(() {}),
+                                    ),
+                                    obscureText: !passwordVisibility,
+                                    decoration: InputDecoration(
+                                      hintText: 'Password',
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Color(0x00000000),
+                                          width: 1,
+                                        ),
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Color(0x00000000),
+                                          width: 1,
+                                        ),
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      errorBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Color(0x00000000),
+                                          width: 1,
+                                        ),
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      focusedErrorBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Color(0x00000000),
+                                          width: 1,
+                                        ),
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      filled: true,
+                                      fillColor: FlutterFlowTheme.of(context)
+                                          .secondaryBackground,
+                                      contentPadding:
+                                          EdgeInsetsDirectional.fromSTEB(
+                                              20, 24, 20, 24),
+                                      suffixIcon: InkWell(
+                                        onTap: () => setState(
+                                          () => passwordVisibility =
+                                              !passwordVisibility,
+                                        ),
+                                        focusNode:
+                                            FocusNode(skipTraversal: true),
+                                        child: Icon(
+                                          passwordVisibility
+                                              ? Icons.visibility_outlined
+                                              : Icons.visibility_off_outlined,
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryColor,
                                           size: 20,
                                         ),
                                       ),
-                                      Expanded(
-                                        child: Text(
-                                          'I give my consent for this information to be collected and used by etwelve papers.',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText1
-                                              .override(
-                                                fontFamily: 'Ubuntu',
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryText,
-                                                fontSize: 10,
-                                              ),
+                                    ),
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyText1
+                                        .override(
+                                          fontFamily: 'Ubuntu',
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryColor,
                                         ),
-                                      ),
-                                    ],
                                   ),
                                 ),
                                 if (FFAppState().giveConsent)
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        5, 5, 10, 0),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        ToggleIcon(
-                                          onPressed: () async {
-                                            setState(() =>
-                                                FFAppState().agree2TandC =
-                                                    !FFAppState().agree2TandC);
-                                          },
-                                          value: FFAppState().agree2TandC,
-                                          onIcon: Icon(
-                                            Icons.check_box,
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryColor,
-                                            size: 20,
-                                          ),
-                                          offIcon: Icon(
-                                            Icons.check_box_outline_blank,
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryColor,
-                                            size: 20,
-                                          ),
-                                        ),
-                                        Text(
-                                          'By clicking Sigh Up you agree to our ',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText1
-                                              .override(
-                                                fontFamily: 'Ubuntu',
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryText,
-                                                fontSize: 10,
-                                              ),
-                                        ),
-                                        Expanded(
-                                          child: Align(
-                                            alignment:
-                                                AlignmentDirectional(-0.95, 0),
-                                            child: InkWell(
-                                              onTap: () async {
-                                                logFirebaseEvent(
-                                                    'CREATE_ACCOUNT_PAGE_Text_i7tcjexu_ON_TAP');
-                                                logFirebaseEvent(
-                                                    'Text_Launch-U-R-L');
-                                                await launchURL(
-                                                    loginCardAppsRecord!
-                                                        .privacyPolicy!);
-                                              },
-                                              child: Text(
-                                                'Privacy Policy',
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyText1
-                                                        .override(
-                                                          fontFamily: 'Ubuntu',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .ultramarineBlue,
-                                                          fontSize: 10,
-                                                          decoration:
-                                                              TextDecoration
-                                                                  .underline,
-                                                        ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                if (FFAppState().agree2TandC)
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        20, 12, 20, 16),
+                                        0, 20, 0, 20),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
-                                        if (FFAppState().giveConsent)
+                                        if (FFAppState().agree2TandC)
                                           FFButtonWidget(
                                             onPressed: () async {
                                               logFirebaseEvent(
-                                                  'CREATE_ACCOUNT_PAGE_ButtonLogin_ON_TAP');
-                                              if (displayNameController!.text !=
+                                                  'CREATE_ACCOUNT_PAGE_SIGN_UP_BTN_ON_TAP');
+                                              if (nameController!.text !=
                                                       null &&
-                                                  displayNameController!.text !=
-                                                      '') {
-                                                if (emailAddressController!
-                                                            .text !=
+                                                  nameController!.text != '') {
+                                                if (emailController!.text !=
                                                         null &&
-                                                    emailAddressController!
-                                                            .text !=
+                                                    emailController!.text !=
                                                         '') {
                                                   if (passwordController!
                                                               .text !=
@@ -586,15 +340,14 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                                                               .text !=
                                                           '') {
                                                     logFirebaseEvent(
-                                                        'ButtonLogin_Auth');
+                                                        'Button_Auth');
                                                     GoRouter.of(context)
                                                         .prepareAuthEvent();
 
                                                     final user =
                                                         await createAccountWithEmail(
                                                       context,
-                                                      emailAddressController!
-                                                          .text,
+                                                      emailController!.text,
                                                       passwordController!.text,
                                                     );
                                                     if (user == null) {
@@ -606,10 +359,9 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                                                       parent: false,
                                                       tutor: false,
                                                       displayName:
-                                                          displayNameController!
-                                                              .text,
+                                                          nameController!.text,
                                                       photoUrl:
-                                                          'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAUVBMVEX+/v68vb+9vb26urrFxsi9vsC4ubu+vr78/Pzz8/Pi4uLu7u729vbk5efa2tr5+fnU1NTo6Ojf39/MzMzExMTW19nq6+3Cw8bOz9HU1NPGxsU3nJ06AAAHF0lEQVR4nO2di3LbKhCGDUhcdJeQZR2//4MesN3GdhpZEotYMnydzrgzTaI/i2BZ4Od0SiQSiUQikUgkEolEIpHYhPznx9+EVOVUW6ay+n0SVdONOeGEPxBXPajQDwWDDVbZCcYYJU9QShkTXRn68SCQxcjojTeFVBiRY9+GfkAnTAALwU30RE6+KzQaCWVjHfopnSgzTj7BL+VJxtrzNOyzQKvxHKnCSjOarxBo/o+O8G2UJyXY67u3xCXCoUNRJtYqNFGk0Q0cJVsbvodEEplEtbp9fqlUMXU3ctyukFxi6lE126zQNNQ59GOvp9jQiz7Bh9APvhYl6B6FJoqxjBl6R/zu6NCPvo6e52tSmX/B+tAPv4rL7hASOoZ++DUUnOwNoZlMFaEffwXj/hCaaeOIv0rVb0rXvimM4E3Ue0bCJzT2IFbUJYaWKrSEDxTrZr0L4E5s5Om6K197JgstYplqX0b6AuZmKk1P6qyQT6FlLHJeVVxbVoh7EuWQsT3IySW0iCWkewhNEDEPiCWIQsw1qRpEIebEreGOw/2NJrSMBWYAfYR0oWUsMEOEEHUtIwNReA0tYwEYhZhLGe4DPnKFMilcqRBxUpPBKAwtYwEYhaj7UhCFmMdDmJwG8wTxDKIQc15aQwjkmCv7E8TcAvX8sHVXmBOOevuQewhzkocWsYh7Z5qj7kpPcnBWiL2sr5wrwjlHvl1hdK55oy6XGrrte4XeOIeW8IGSCTeBqEfDG6PjCmmGfQ34NDgppAx3T2ppXVopFbTFHkJb93YJIeZ5xR8qlxhS1DnpHxyCGMf+Sykvu/NvzFW2Z/r1u/TfQhjNCaHZSNyjcI7m7GU77sps8kjkWco92Sn+fO2Z7TsU83hewjubp8JmoIjpvMXJ5qfv50Y/CYyOglGxtq3mMQo076JY36NO0YwTL1TXzzG8pT8Z8tLMAs3nffs5R1+3WETNn9JwPscbwDulZsy8kII+Y/8pBKOM6aiG+R+oGmup8CrxJpCJBvN+4E2oQZt43Xl8oHr4DeF7RvVF03Xa0DVF+WuC90WMw90mfr3ARCKRSGxGqno4z3O2Fj2fh7r8qujjHlvKYr5wvr2yb78mO0822UEssCq0YLc54a7CvvkiTi7nEqtC1VxtRu18/pAwoXuJLpKyN/Ko2FRf+wnzXRhF5lanOsrthFbQnWsyL1ivOutWV2CJopw+lir2wfNzhaGtTtp0LSAnSf6lsQm6KGx/vUrb+HkSaGD3lf1gkWw75mow8AHT6YiA5xH7LaZzexVSwXSggqN1DRSuDgorFFqvU9tUD2+pheMGtk3wAIV/902IWzAt5eAF1Oq6czPCfvhxyxvSrtMziPRsG+x63NjYs2/GwAdA2XhIHdlEcOCEksMF2n41V/67VClPNcih+13wQzxA6/2GcxAaK+9R7P3MI9aSC9+O9WVQfcS/LV8bsIE+FFK/phL7bS3h4IXHN7HwPFdaib8cVR2dqf3A7C2Gx2bbP+NtG2PJkCj0dvpLUySt1JfRkgo71j+Re7IehLETgIH56E5laFXPeDk9NKFppMTOhsH1SQhLRDgE9TAZzjxWtjcjGPxEsQ0t6gUftth4xgoLZdAzDIkl6X5AGfQ0UZ660KJeoFQAKzydrqFFvSAo+JgvGaKe1LZS8M5UoXoN7bIi9CkbJ7t8eCh8Z9pgU0ihPc86ZO8hfGe65wInj9h1YeCVKFfLEmCsQtjhosVSoXkCthy16+iyX4APZRbIWimBXfWWdrDAF0NY17MOXwyB622a4lN4Aa3tu5uUwQNqMiEhNsYCk3PIYlTrfYfedmDN+dzNAj0A6hRSolQIeeUOwBVA8ICuIu68WNQvv18hqNHpgFIh5PpTg1Ih5IbTpDAMSWFSiF8hZF+Kc7SAHA8xZm2wFnYYM+8cNPPGOXuCnB9inOMTAlnWlxjrNICVKIlnZ+kzsPXSHp9C4G20FbZWKij0LREzrjVgwSjw3j2JbKcCEwx8m/CAateXgN9+KYHuiQWCejiKKGEu+wVC+DlUMpn3O/gmUyqsyaSvUzOtZiHPHt4Vmk7G52nZIg/9NhqB/g4FWSrr1BJMZG73mXi/Wq/MAvY4OdHez3PLkBr5pT7IHqOc6V/b3COUPfw/RHOg+8fNHPhIhYyJoT3O38T+INnrw7wjgvlitYUR6f2dzAkXgbzN7C+1KmZrdeBx/OBkrgPfkdRO53yHT2Is8h5U/X9Xak33hFMX+7Brp9bZzny3a4PLeK/tGz1atzwnhbbbNH+EUYcjeA/+9nNVOXTjzXR9j8KHW3vXKwRWe4tUZXGeM/sa3f5+7oe4Jc90XG7tUrZqsl60WXa7p4y/cf8FkEum57mpJxXBvYBvfF39Iw1tpdQ0TfWdvjafS6WqVkZ2Q1AikUgkEolEIpFIJBKJhCf+ByX2bjMesDYIAAAAAElFTkSuQmCC',
+                                                          'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/finance-app-sample-kugwu4/assets/ijvuhvqbvns6/uiAvatar@2x.png',
                                                       student: true,
                                                       subscription: '0',
                                                       agreedToTandC: true,
@@ -622,13 +374,13 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                                                             usersCreateData);
 
                                                     logFirebaseEvent(
-                                                        'ButtonLogin_Navigate-To');
+                                                        'Button_Navigate-To');
 
                                                     context.pushNamedAuth(
                                                         'Onboarding1', mounted);
                                                   } else {
                                                     logFirebaseEvent(
-                                                        'ButtonLogin_Alert-Dialog');
+                                                        'Button_Alert-Dialog');
                                                     await showDialog(
                                                       context: context,
                                                       builder:
@@ -652,7 +404,7 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                                                   }
                                                 } else {
                                                   logFirebaseEvent(
-                                                      'ButtonLogin_Alert-Dialog');
+                                                      'Button_Alert-Dialog');
                                                   await showDialog(
                                                     context: context,
                                                     builder:
@@ -676,7 +428,7 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                                                 }
                                               } else {
                                                 logFirebaseEvent(
-                                                    'ButtonLogin_Alert-Dialog');
+                                                    'Button_Alert-Dialog');
                                                 await showDialog(
                                                   context: context,
                                                   builder:
@@ -701,205 +453,470 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget> {
                                             },
                                             text: 'Sign Up',
                                             options: FFButtonOptions(
-                                              width: 200,
+                                              width: 160,
                                               height: 50,
                                               color:
                                                   FlutterFlowTheme.of(context)
-                                                      .secondaryColor,
-                                              textStyle: FlutterFlowTheme.of(
-                                                      context)
-                                                  .subtitle2
-                                                  .override(
-                                                    fontFamily: 'Ubuntu',
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .secondaryText,
-                                                    fontSize: 18,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                              elevation: 2,
+                                                      .primaryColor,
+                                              textStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .subtitle2
+                                                      .override(
+                                                        fontFamily: 'Ubuntu',
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryText,
+                                                      ),
+                                              elevation: 3,
                                               borderSide: BorderSide(
                                                 color: Colors.transparent,
                                                 width: 1,
                                               ),
                                               borderRadius:
-                                                  BorderRadius.circular(8),
+                                                  BorderRadius.circular(30),
                                             ),
                                           ),
                                       ],
                                     ),
                                   ),
-                                if (FFAppState().agree2TandC)
-                                  Align(
-                                    alignment: AlignmentDirectional(0, 0),
-                                    child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 0, 0, 10),
-                                      child: Container(
-                                        width: 130,
-                                        height: 44,
-                                        child: Stack(
+                                if (FFAppState().giveConsent)
+                                  Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      if (FFAppState().agree2TandC)
+                                        FlutterFlowIconButton(
+                                          borderColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primaryColor,
+                                          borderRadius: 50,
+                                          borderWidth: 2,
+                                          buttonSize: 50,
+                                          fillColor: Colors.transparent,
+                                          icon: FaIcon(
+                                            FontAwesomeIcons.google,
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryColor,
+                                            size: 25,
+                                          ),
+                                          onPressed: () async {
+                                            logFirebaseEvent(
+                                                'CREATE_ACCOUNT_PAGE_google_ICN_ON_TAP');
+                                            logFirebaseEvent('IconButton_Auth');
+                                            GoRouter.of(context)
+                                                .prepareAuthEvent();
+                                            final user =
+                                                await signInWithGoogle(context);
+                                            if (user == null) {
+                                              return;
+                                            }
+                                            logFirebaseEvent(
+                                                'IconButton_Navigate-To');
+
+                                            context.pushNamedAuth(
+                                                'Onboarding3', mounted);
+                                          },
+                                        ),
+                                      if (FFAppState().agree2TandC)
+                                        FFButtonWidget(
+                                          onPressed: () async {
+                                            logFirebaseEvent(
+                                                'CREATE_ACCOUNT_PAGE_Button-Login_ON_TAP');
+                                            logFirebaseEvent(
+                                                'Button-Login_Auth');
+                                            GoRouter.of(context)
+                                                .prepareAuthEvent();
+                                            final user =
+                                                await signInAnonymously(
+                                                    context);
+                                            if (user == null) {
+                                              return;
+                                            }
+                                            logFirebaseEvent(
+                                                'Button-Login_Navigate-To');
+
+                                            context.pushNamedAuth(
+                                                'home', mounted);
+                                          },
+                                          text: 'Continue as Guest',
+                                          options: FFButtonOptions(
+                                            width: 230,
+                                            height: 50,
+                                            color: FlutterFlowTheme.of(context)
+                                                .background,
+                                            textStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .subtitle2
+                                                    .override(
+                                                      fontFamily: 'Ubuntu',
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .textColor,
+                                                    ),
+                                            elevation: 3,
+                                            borderSide: BorderSide(
+                                              color: Colors.transparent,
+                                              width: 1,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(30),
+                                          ),
+                                        ),
+                                    ],
+                                  ),
+                                Divider(
+                                  height: 30,
+                                  thickness: 2,
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryColor,
+                                ),
+                                Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.8,
+                                      height: 44,
+                                      decoration: BoxDecoration(
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryBackground,
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      child: InkWell(
+                                        onTap: () async {
+                                          logFirebaseEvent(
+                                              'CREATE_ACCOUNT_PAGE_Row_nuy63qu1_ON_TAP');
+                                          logFirebaseEvent('Row_Navigate-To');
+
+                                          context.pushNamed(
+                                            'login',
+                                            extra: <String, dynamic>{
+                                              kTransitionInfoKey:
+                                                  TransitionInfo(
+                                                hasTransition: true,
+                                                transitionType:
+                                                    PageTransitionType
+                                                        .leftToRight,
+                                                duration:
+                                                    Duration(milliseconds: 220),
+                                              ),
+                                            },
+                                          );
+                                        },
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
                                           children: [
-                                            if (FFAppState().giveConsent)
-                                              Align(
-                                                alignment:
-                                                    AlignmentDirectional(0, 0),
-                                                child: FFButtonWidget(
-                                                  onPressed: () async {
-                                                    logFirebaseEvent(
-                                                        'CREATE_ACCOUNT_PAGE_SIGN_UP_BTN_ON_TAP');
-                                                    logFirebaseEvent(
-                                                        'Button_Auth');
-                                                    GoRouter.of(context)
-                                                        .prepareAuthEvent();
-                                                    final user =
-                                                        await signInWithGoogle(
-                                                            context);
-                                                    if (user == null) {
-                                                      return;
-                                                    }
-                                                    logFirebaseEvent(
-                                                        'Button_Backend-Call');
+                                            InkWell(
+                                              onTap: () async {
+                                                logFirebaseEvent(
+                                                    'CREATE_ACCOUNT_PAGE_Icon_ccj2ur79_ON_TAP');
+                                                logFirebaseEvent(
+                                                    'Icon_Navigate-To');
 
-                                                    final usersUpdateData =
-                                                        createUsersRecordData(
-                                                      agreedToTandC: true,
-                                                      agreedToTandCDate:
-                                                          getCurrentTimestamp,
-                                                    );
-                                                    await currentUserReference!
-                                                        .update(
-                                                            usersUpdateData);
-                                                    logFirebaseEvent(
-                                                        'Button_Navigate-To');
+                                                context.pushNamed('login');
+                                              },
+                                              child: Icon(
+                                                Icons.arrow_back_rounded,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryColor,
+                                                size: 24,
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(4, 0, 24, 0),
+                                              child: InkWell(
+                                                onTap: () async {
+                                                  logFirebaseEvent(
+                                                      'CREATE_ACCOUNT_PAGE_Text_7stcm7if_ON_TAP');
+                                                  logFirebaseEvent(
+                                                      'Text_Navigate-To');
 
-                                                    context.pushNamedAuth(
-                                                      'Onboarding3',
-                                                      mounted,
-                                                      extra: <String, dynamic>{
-                                                        kTransitionInfoKey:
-                                                            TransitionInfo(
-                                                          hasTransition: true,
-                                                          transitionType:
-                                                              PageTransitionType
-                                                                  .rightToLeft,
-                                                          duration: Duration(
-                                                              milliseconds:
-                                                                  100),
-                                                        ),
-                                                      },
-                                                    );
-                                                  },
-                                                  text: 'Sign Up',
-                                                  icon: Icon(
-                                                    Icons.add,
-                                                    color: Colors.transparent,
-                                                    size: 20,
-                                                  ),
-                                                  options: FFButtonOptions(
-                                                    width: 130,
-                                                    height: 44,
-                                                    color: Colors.white,
-                                                    textStyle:
-                                                        GoogleFonts.getFont(
-                                                      'Roboto',
-                                                      color: Color(0xFF606060),
-                                                      fontSize: 17,
-                                                    ),
-                                                    elevation: 4,
-                                                    borderSide: BorderSide(
-                                                      color: Colors.transparent,
-                                                      width: 0,
-                                                    ),
-                                                  ),
+                                                  context.pushNamed('login');
+                                                },
+                                                child: Text(
+                                                  'Login',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyText1
+                                                      .override(
+                                                        fontFamily: 'Ubuntu',
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryColor,
+                                                      ),
                                                 ),
                                               ),
-                                            if (FFAppState().giveConsent)
-                                              Align(
-                                                alignment: AlignmentDirectional(
-                                                    -0.7, 0),
-                                                child: Container(
-                                                  width: 22,
-                                                  height: 22,
-                                                  clipBehavior: Clip.antiAlias,
-                                                  decoration: BoxDecoration(
-                                                    shape: BoxShape.circle,
-                                                  ),
-                                                  child: Image.network(
-                                                    'https://i0.wp.com/nanophorm.com/wp-content/uploads/2018/04/google-logo-icon-PNG-Transparent-Background.png?w=1000&ssl=1',
-                                                    fit: BoxFit.contain,
-                                                  ),
-                                                ),
-                                              ),
+                                            ),
+                                            Text(
+                                              'Already have an account?',
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText1
+                                                      .override(
+                                                        fontFamily: 'Ubuntu',
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryText,
+                                                      ),
+                                            ),
                                           ],
                                         ),
                                       ),
                                     ),
-                                  ),
-                                Divider(
-                                  height: 2,
-                                  thickness: 1,
-                                  indent: 20,
-                                  endIndent: 20,
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryColor,
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 12, 0, 24),
-                                  child: FFButtonWidget(
-                                    onPressed: () async {
-                                      logFirebaseEvent(
-                                          'CREATE_ACCOUNT_ButtonCreateAccount_ON_TA');
-                                      logFirebaseEvent(
-                                          'ButtonCreateAccount_Navigate-To');
-
-                                      context.pushNamed(
-                                        'login',
-                                        extra: <String, dynamic>{
-                                          kTransitionInfoKey: TransitionInfo(
-                                            hasTransition: true,
-                                            transitionType:
-                                                PageTransitionType.fade,
-                                            duration:
-                                                Duration(milliseconds: 250),
-                                          ),
-                                        },
-                                      );
-                                    },
-                                    text: 'Login',
-                                    options: FFButtonOptions(
-                                      width: 170,
-                                      height: 50,
-                                      color: Colors.transparent,
-                                      textStyle: FlutterFlowTheme.of(context)
-                                          .subtitle2
-                                          .override(
-                                            fontFamily: 'Ubuntu',
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryText,
-                                          ),
-                                      elevation: 0,
-                                      borderSide: BorderSide(
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryColor,
-                                        width: 1,
-                                      ),
-                                      borderRadius: BorderRadius.circular(12),
-                                    ),
-                                  ),
+                                  ],
                                 ),
                               ],
                             ),
                           ),
                         ),
-                      );
-                    },
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 30),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    20, 12, 20, 0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Expanded(
+                                      child: Container(
+                                        width: 100,
+                                        height: 30,
+                                        decoration: BoxDecoration(
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryBackground,
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                        ),
+                                        child: Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  2, 4, 2, 2),
+                                          child: InkWell(
+                                            onTap: () async {
+                                              logFirebaseEvent(
+                                                  'CREATE_ACCOUNT_PAGE_Text_j65vpwl7_ON_TAP');
+                                              logFirebaseEvent(
+                                                  'Text_Alert-Dialog');
+                                              await showDialog(
+                                                context: context,
+                                                builder: (alertDialogContext) {
+                                                  return AlertDialog(
+                                                    title: Text(
+                                                        'Why and How we use this information:'),
+                                                    content: Text(
+                                                        '1. Name and Surname - We collect your name and surname for identification purpose, other users will see your name and surname when communicating with you via chats.\n\n2. Email - We collect your email for creating an accoung for you, this email will only be visible to you and etwelve.co developers for spefic uses only, other app users won\'t see this email.\n\n3. Password - We collect your Password for protecting your account, it is only visible to you. etwelve.co won\'t have access to your Password, it\'s not even visible in our database.\n\netwelve.co will only access your account only with your permission granted.'),
+                                                    actions: [
+                                                      TextButton(
+                                                        onPressed: () =>
+                                                            Navigator.pop(
+                                                                alertDialogContext),
+                                                        child: Text('Ok'),
+                                                      ),
+                                                    ],
+                                                  );
+                                                },
+                                              );
+                                            },
+                                            child: Text(
+                                              'Why & How we use this information.',
+                                              textAlign: TextAlign.center,
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText1
+                                                      .override(
+                                                        fontFamily: 'Ubuntu',
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryColor,
+                                                        fontSize: 15,
+                                                        decoration:
+                                                            TextDecoration
+                                                                .underline,
+                                                      ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(5, 5, 10, 0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    ToggleIcon(
+                                      onPressed: () async {
+                                        setState(() =>
+                                            FFAppState().giveConsent =
+                                                !FFAppState().giveConsent);
+                                      },
+                                      value: FFAppState().giveConsent,
+                                      onIcon: Icon(
+                                        Icons.check_box,
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryColor,
+                                        size: 20,
+                                      ),
+                                      offIcon: Icon(
+                                        Icons.check_box_outline_blank,
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryColor,
+                                        size: 20,
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: Text(
+                                        'I give my consent for this information to be collected and used by etwelve papers.',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText1
+                                            .override(
+                                              fontFamily: 'Ubuntu',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryText,
+                                              fontSize: 12,
+                                            ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(5, 5, 10, 0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    ToggleIcon(
+                                      onPressed: () async {
+                                        setState(() =>
+                                            FFAppState().agree2TandC =
+                                                !FFAppState().agree2TandC);
+                                      },
+                                      value: FFAppState().agree2TandC,
+                                      onIcon: Icon(
+                                        Icons.check_box,
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryColor,
+                                        size: 20,
+                                      ),
+                                      offIcon: Icon(
+                                        Icons.check_box_outline_blank,
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryColor,
+                                        size: 20,
+                                      ),
+                                    ),
+                                    Text(
+                                      'By clicking Sigh Up you agree to our ',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyText1
+                                          .override(
+                                            fontFamily: 'Ubuntu',
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                            fontSize: 12,
+                                          ),
+                                    ),
+                                    Expanded(
+                                      child: Align(
+                                        alignment: AlignmentDirectional(-1, 0),
+                                        child: StreamBuilder<List<AppsRecord>>(
+                                          stream: queryAppsRecord(
+                                            queryBuilder: (appsRecord) =>
+                                                appsRecord.where('name',
+                                                    isEqualTo:
+                                                        'etwelve papers'),
+                                            singleRecord: true,
+                                          ),
+                                          builder: (context, snapshot) {
+                                            // Customize what your widget looks like when it's loading.
+                                            if (!snapshot.hasData) {
+                                              return Center(
+                                                child: SizedBox(
+                                                  width: 25,
+                                                  height: 25,
+                                                  child: SpinKitFadingCube(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .secondaryColor,
+                                                    size: 25,
+                                                  ),
+                                                ),
+                                              );
+                                            }
+                                            List<AppsRecord>
+                                                textAppsRecordList =
+                                                snapshot.data!;
+                                            // Return an empty Container when the document does not exist.
+                                            if (snapshot.data!.isEmpty) {
+                                              return Container();
+                                            }
+                                            final textAppsRecord =
+                                                textAppsRecordList.isNotEmpty
+                                                    ? textAppsRecordList.first
+                                                    : null;
+                                            return InkWell(
+                                              onTap: () async {
+                                                logFirebaseEvent(
+                                                    'CREATE_ACCOUNT_PAGE_Text_6oz6kz7i_ON_TAP');
+                                                logFirebaseEvent(
+                                                    'Text_Launch-U-R-L');
+                                                await launchURL(textAppsRecord!
+                                                    .privacyPolicy!);
+                                              },
+                                              child: Text(
+                                                'Privacy Policy',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyText1
+                                                        .override(
+                                                          fontFamily: 'Ubuntu',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryColor,
+                                                          fontSize: 12,
+                                                          decoration:
+                                                              TextDecoration
+                                                                  .underline,
+                                                        ),
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ),
+          ],
         ),
       ),
     );

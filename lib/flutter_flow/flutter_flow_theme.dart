@@ -41,7 +41,7 @@ abstract class FlutterFlowTheme {
   late Color white;
   late Color iconGray;
   late Color grayDark;
-  late Color darkBG;
+  late Color transparentBlack;
   late Color background;
   late Color grayLines;
   late Color flickrPink;
@@ -86,19 +86,19 @@ abstract class FlutterFlowTheme {
 }
 
 class LightModeTheme extends FlutterFlowTheme {
-  late Color primaryColor = const Color(0xFFFFFFFF);
-  late Color secondaryColor = const Color(0xFF000000);
-  late Color tertiaryColor = const Color(0xFFFFFFFF);
-  late Color alternate = const Color(0xFFA6A6A6);
-  late Color primaryBackground = const Color(0xFFFFFFFF);
-  late Color secondaryBackground = const Color(0xFF000000);
-  late Color primaryText = const Color(0xFF000000);
-  late Color secondaryText = const Color(0xFFFFFFFF);
+  late Color primaryColor = const Color(0xFF00968A);
+  late Color secondaryColor = const Color(0xFF00968A);
+  late Color tertiaryColor = const Color(0xFF39D2C0);
+  late Color alternate = const Color(0xFFDBE2E7);
+  late Color primaryBackground = const Color(0xFFF1F4F8);
+  late Color secondaryBackground = const Color(0xFFFFFFFF);
+  late Color primaryText = const Color(0xFF111417);
+  late Color secondaryText = const Color(0xFF8B97A2);
 
-  late Color white = Color(0x99000000);
-  late Color iconGray = Color(0xFF8B97A2);
+  late Color white = Color(0xFF1A1F24);
+  late Color iconGray = Color(0xFF111417);
   late Color grayDark = Color(0xFF57636C);
-  late Color darkBG = Color(0xFF111417);
+  late Color transparentBlack = Color(0x34000000);
   late Color background = Color(0xFFF1F4F8);
   late Color grayLines = Color(0xFFDBE2E7);
   late Color flickrPink = Color(0xFFF72585);
@@ -150,21 +150,21 @@ class ThemeTypography extends Typography {
   String get title1Family => 'Ubuntu';
   TextStyle get title1 => GoogleFonts.getFont(
         'Ubuntu',
-        color: theme.darkBG,
+        color: theme.transparentBlack,
         fontWeight: FontWeight.bold,
         fontSize: 30,
       );
   String get title2Family => 'Ubuntu';
   TextStyle get title2 => GoogleFonts.getFont(
         'Ubuntu',
-        color: theme.darkBG,
+        color: theme.transparentBlack,
         fontWeight: FontWeight.bold,
         fontSize: 24,
       );
   String get title3Family => 'Ubuntu';
   TextStyle get title3 => GoogleFonts.getFont(
         'Ubuntu',
-        color: theme.darkBG,
+        color: theme.transparentBlack,
         fontWeight: FontWeight.w600,
         fontSize: 20,
       );
@@ -178,7 +178,7 @@ class ThemeTypography extends Typography {
   String get subtitle2Family => 'Ubuntu';
   TextStyle get subtitle2 => GoogleFonts.getFont(
         'Ubuntu',
-        color: theme.darkBG,
+        color: theme.transparentBlack,
         fontWeight: FontWeight.normal,
         fontSize: 16,
       );
@@ -192,26 +192,26 @@ class ThemeTypography extends Typography {
   String get bodyText2Family => 'Ubuntu';
   TextStyle get bodyText2 => GoogleFonts.getFont(
         'Ubuntu',
-        color: theme.darkBG,
+        color: theme.transparentBlack,
         fontWeight: FontWeight.normal,
         fontSize: 14,
       );
 }
 
 class DarkModeTheme extends FlutterFlowTheme {
-  late Color primaryColor = const Color(0xFF000000);
-  late Color secondaryColor = const Color(0xFFFFFFFF);
-  late Color tertiaryColor = const Color(0xFFFFFFFF);
-  late Color alternate = const Color(0xFFA6A6A6);
-  late Color primaryBackground = const Color(0xFF000000);
-  late Color secondaryBackground = const Color(0xFFFFFFFF);
+  late Color primaryColor = const Color(0xFF00968A);
+  late Color secondaryColor = const Color(0xFF00968A);
+  late Color tertiaryColor = const Color(0xFF39D2C0);
+  late Color alternate = const Color(0xFF262D34);
+  late Color primaryBackground = const Color(0xFF1A1F24);
+  late Color secondaryBackground = const Color(0xFF111417);
   late Color primaryText = const Color(0xFFFFFFFF);
-  late Color secondaryText = const Color(0xFF000000);
+  late Color secondaryText = const Color(0xFF8B97A2);
 
   late Color white = Color(0x99FFFFFF);
   late Color iconGray = Color(0xFF8B97A2);
   late Color grayDark = Color(0xFF57636C);
-  late Color darkBG = Color(0xFF111417);
+  late Color transparentBlack = Color(0x34FFFFFF);
   late Color background = Color(0xFFF1F4F8);
   late Color grayLines = Color(0xFFDBE2E7);
   late Color flickrPink = Color(0xFFF72585);

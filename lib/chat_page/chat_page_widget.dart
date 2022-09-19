@@ -97,7 +97,7 @@ class _ChatPageWidgetState extends State<ChatPageWidget> {
             );
           },
           child: Icon(
-            Icons.arrow_back_rounded,
+            Icons.arrow_back_ios,
             color: FlutterFlowTheme.of(context).secondaryColor,
             size: 24,
           ),
@@ -169,9 +169,9 @@ class _ChatPageWidgetState extends State<ChatPageWidget> {
                     allowImages: true,
                     backgroundColor:
                         FlutterFlowTheme.of(context).primaryBackground,
-                    timeDisplaySetting: TimeDisplaySetting.visibleOnTap,
+                    timeDisplaySetting: TimeDisplaySetting.alwaysVisible,
                     currentUserBoxDecoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).secondaryColor,
+                      color: FlutterFlowTheme.of(context).secondaryBackground,
                       border: Border.all(
                         color: Colors.transparent,
                       ),
@@ -186,7 +186,7 @@ class _ChatPageWidgetState extends State<ChatPageWidget> {
                     ),
                     currentUserTextStyle: GoogleFonts.getFont(
                       'DM Sans',
-                      color: FlutterFlowTheme.of(context).secondaryText,
+                      color: FlutterFlowTheme.of(context).primaryText,
                       fontWeight: FontWeight.w500,
                       fontSize: 14,
                       fontStyle: FontStyle.normal,
@@ -199,21 +199,15 @@ class _ChatPageWidgetState extends State<ChatPageWidget> {
                     ),
                     inputHintTextStyle: GoogleFonts.getFont(
                       'DM Sans',
-                      color: Color(0xFF95A1AC),
+                      color: FlutterFlowTheme.of(context).primaryColor,
                       fontWeight: FontWeight.normal,
                       fontSize: 14,
                     ),
                     inputTextStyle: GoogleFonts.getFont(
                       'DM Sans',
-                      color: Color(0xFF95A1AC),
+                      color: FlutterFlowTheme.of(context).primaryColor,
                       fontWeight: FontWeight.normal,
                       fontSize: 14,
-                    ),
-                    emptyChatWidget: Center(
-                      child: Image.asset(
-                        'assets/images/undraw_Push_notifications_re_t84m.png',
-                        width: MediaQuery.of(context).size.width * 0.76,
-                      ),
                     ),
                   )
                 : Center(

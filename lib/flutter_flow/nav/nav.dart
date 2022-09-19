@@ -152,9 +152,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'viewer',
               path: 'viewer',
               requireAuth: true,
+              asyncParams: {
+                'paper': getDoc('papers', PapersRecord.serializer),
+              },
               builder: (context, params) => ViewerWidget(
-                paper: params.getParam(
-                    'paper', ParamType.DocumentReference, 'papers'),
+                paper: params.getParam('paper', ParamType.Document),
               ),
             ),
             FFRoute(
@@ -206,32 +208,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                 chat: params.getParam(
                     'chat', ParamType.DocumentReference, 'chats'),
               ),
-            ),
-            FFRoute(
-              name: 'tutors',
-              path: 'tutors',
-              requireAuth: true,
-              builder: (context, params) => TutorsWidget(),
-            ),
-            FFRoute(
-              name: 'privacyPolicy',
-              path: 'privacyPolicy',
-              builder: (context, params) => PrivacyPolicyWidget(),
-            ),
-            FFRoute(
-              name: 'blocked',
-              path: 'blocked',
-              builder: (context, params) => BlockedWidget(),
-            ),
-            FFRoute(
-              name: 'terms',
-              path: 'terms',
-              builder: (context, params) => TermsWidget(),
-            ),
-            FFRoute(
-              name: 'disclaimer',
-              path: 'disclaimer',
-              builder: (context, params) => DisclaimerWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ).toRoute(appStateNotifier),
@@ -407,7 +383,7 @@ class FFRoute {
                   color: Colors.transparent,
                   child: Builder(
                     builder: (context) => Image.asset(
-                      'assets/images/White_Wifi_Icon_Computer_Logo_(4).png',
+                      'assets/images/page_load.png',
                       fit: BoxFit.fill,
                     ),
                   ),
